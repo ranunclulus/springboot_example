@@ -55,4 +55,15 @@ public class MvcController {
         model.addAttribute("hits", ++hitCount);
         return "hits";
     }
+
+    @RequestMapping("/lotto")
+    public String lotto(Model model) {
+        List<Integer> lottoNum = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            int num = (int)(Math.random() * 45) + 1;
+            lottoNum.add(num);
+        }
+        model.addAttribute("lotto", lottoNum.toString());
+        return "lotto";
+    }
 }
