@@ -11,6 +11,7 @@ import java.util.List;
 
 @Controller
 public class MvcController {
+    private int hitCount = 0;
     @RequestMapping("/")
     // view가 활용을 하기 위한 모델
     public String home(Model model) {
@@ -47,5 +48,11 @@ public class MvcController {
         );
         model.addAttribute("studentList", studentList);
         return "each";
+    }
+
+    @RequestMapping("/hits")
+    public String hits(Model model) {
+        model.addAttribute("hits", ++hitCount);
+        return "hits";
     }
 }
