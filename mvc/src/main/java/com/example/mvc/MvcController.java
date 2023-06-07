@@ -5,6 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class MvcController {
     @RequestMapping("/")
@@ -27,5 +30,14 @@ public class MvcController {
                 true
         );
         return "if-unless";
+    }
+    @RequestMapping("/each")
+    public String items(Model model) {
+        List<String> listOfStrings = new ArrayList<>();
+        listOfStrings.add("foo");
+        listOfStrings.add("bar");
+        listOfStrings.add("baz");
+        model.addAttribute("listOfStrings", listOfStrings);
+        return "each";
     }
 }
