@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -38,6 +39,13 @@ public class MvcController {
         listOfStrings.add("bar");
         listOfStrings.add("baz");
         model.addAttribute("listOfStrings", listOfStrings);
+
+        List<Student> studentList = Arrays.asList( // add 대신에 쓰는 것
+                new Student("Alex", "alex@gmail.com"),
+                new Student("Brad", "brad@gmail.com"),
+                new Student("Chad", "chad@gmail.com")
+        );
+        model.addAttribute("studentList", studentList);
         return "each";
     }
 }

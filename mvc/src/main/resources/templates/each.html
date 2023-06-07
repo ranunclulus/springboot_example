@@ -12,5 +12,9 @@
     <div>
         <p th:each="item: ${listOfStrings}">Item: [[${item}]]</p>
     </div>
+    <div th:each="student: ${studentList}">
+        <p>name: [[${student.name}]]</p>
+        <p>email: [[${student.email}]]</p>
+    </div>
 </body>
 </html>
