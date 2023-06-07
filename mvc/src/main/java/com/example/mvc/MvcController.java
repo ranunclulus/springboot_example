@@ -12,6 +12,7 @@ import java.util.List;
 @Controller
 public class MvcController {
     private int hitCount = 0;
+    private List<List<Integer>> history = new ArrayList<>();
     @RequestMapping("/")
     // view가 활용을 하기 위한 모델
     public String home(Model model) {
@@ -63,7 +64,13 @@ public class MvcController {
             int num = (int)(Math.random() * 45) + 1;
             lottoNum.add(num);
         }
+        history.add(lottoNum);
         model.addAttribute("lotto", lottoNum.toString());
         return "lotto";
+    }
+
+    @RequestMapping("history")
+    public String history(Model model) {
+        return "history";
     }
 }
