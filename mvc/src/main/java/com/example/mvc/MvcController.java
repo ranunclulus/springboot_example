@@ -14,8 +14,10 @@ import java.util.Random;
 public class MvcController {
   //  private int hitCount = 0;
     private List<List<Integer>> history = new ArrayList<>();
-    private LottoService lottoService;
-    public MvcController(LottoService lottoService) {
+    private final HitsService hitsService;
+    private final LottoService lottoService;
+    public MvcController(HitsService hitsService, LottoService lottoService) {
+        this.hitsService = hitsService;
         this.lottoService = lottoService;
     }
     @RequestMapping("/")
@@ -58,21 +60,14 @@ public class MvcController {
 
     @RequestMapping("/hits")
     public String hits(Model model) {
-        int hitCount = lottoService.addHit();
+        int hitCount = hitsService.addHit();
         model.addAttribute("hits", ++hitCount);
         return "hits";
     }
 
     @RequestMapping("/lotto")
     public String lotto(Model model) {
-        List<Integer> lottoNum = new ArrayList<>();
-        Random random = new Random();
-        for (int i = 0; i < 6; i++) {
-            int num = random.nextInt();
-            lottoNum.add(num);
-        }
-        history.add(lottoNum);
-
+        List<Integer> lottoNum = lottoService.randomLotto();
         model.addAttribute("lotto", lottoNum.toString());
         return "lotto";
     }
