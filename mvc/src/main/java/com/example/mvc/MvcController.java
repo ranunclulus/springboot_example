@@ -8,11 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class MvcController {
-    private int hitCount = 0;
+  //  private int hitCount = 0;
     private List<List<Integer>> history = new ArrayList<>();
+    private LottoService lottoService;
+    public MvcController(LottoService lottoService) {
+        this.lottoService = lottoService;
+    }
     @RequestMapping("/")
     // view가 활용을 하기 위한 모델
     public String home(Model model) {
@@ -53,6 +58,7 @@ public class MvcController {
 
     @RequestMapping("/hits")
     public String hits(Model model) {
+        int hitCount = lottoService.addHit();
         model.addAttribute("hits", ++hitCount);
         return "hits";
     }
@@ -60,11 +66,13 @@ public class MvcController {
     @RequestMapping("/lotto")
     public String lotto(Model model) {
         List<Integer> lottoNum = new ArrayList<>();
+        Random random = new Random();
         for (int i = 0; i < 6; i++) {
-            int num = (int)(Math.random() * 45) + 1;
+            int num = random.nextInt();
             lottoNum.add(num);
         }
         history.add(lottoNum);
+
         model.addAttribute("lotto", lottoNum.toString());
         return "lotto";
     }
