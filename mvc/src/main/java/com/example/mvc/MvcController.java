@@ -13,7 +13,6 @@ import java.util.Random;
 @Controller
 public class MvcController {
   //  private int hitCount = 0;
-    private List<List<Integer>> history = new ArrayList<>();
     private final HitsService hitsService;
     private final LottoService lottoService;
     public MvcController(HitsService hitsService, LottoService lottoService) {
@@ -74,6 +73,7 @@ public class MvcController {
 
     @RequestMapping("history")
     public String history(Model model) {
+        model.addAttribute("history", lottoService.getHistory());
         return "history";
     }
 }
