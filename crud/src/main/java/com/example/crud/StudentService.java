@@ -17,4 +17,8 @@ public class StudentService {
         studentDtoList.add(studentDto);
         return studentDto;
     }
+
+    public List<StudentDto> readStudentAll() {
+        return this.studentDtoList;
+    }
 }
