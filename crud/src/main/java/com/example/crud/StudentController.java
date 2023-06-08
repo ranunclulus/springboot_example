@@ -1,5 +1,6 @@
 package com.example.crud;
 
+import com.example.crud.model.StudentDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,13 +20,12 @@ public class StudentController {
     }
     @PostMapping("/create")
     public String create(
-            @RequestParam("name")
-            String name,
-            @RequestParam("email")
-            String email
-    ) {
-        System.out.println("name = " + name);
-        System.out.println("email = " + email);
-        return "create";
+            @RequestParam("name") String name,
+            @RequestParam("email") String email) {
+        System.out.println(name);
+        System.out.println(email);
+        StudentDto newStudent = studentService.createStudent(name, email);
+        System.out.println(newStudent);
+        return "redirect:/create-view";
     }
 }
