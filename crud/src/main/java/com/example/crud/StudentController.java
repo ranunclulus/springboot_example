@@ -65,4 +65,6 @@ public class StudentController {
         studentService.updateStudent(id, name, email);
         return "redirect:/{id}";
     }
+
+    
 }
