@@ -8,5 +8,6 @@
 <h1>[[${student.id}]] [[${student.name}]]</h1>
 <p>이메일: [[${student.email}]]</p>
 <a href="/home">back</a>
+<a th:href="@{/{id}/update-view (id=${student.id})}">edit</a>
 </body>
 </html>

@@ -47,4 +47,12 @@ public class StudentController {
         );
         return "read";
     }
+
+    @GetMapping("/{id}/update-view")
+    public String updateView(@PathVariable("id") Long id, Model model){
+        model.addAttribute(
+                "student",
+                studentService.readStudent(id));
+        return "update";
+    }
 }
