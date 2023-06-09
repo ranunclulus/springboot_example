@@ -13,7 +13,7 @@
 <!-- 등록된 학생이 있을 때 -->
 <div th:unless="${studentList.isEmpty()}" th:each="student: ${studentList}">
   <p>ID: [[${student.id}]]</p><br>
-  <p>Name: [[${student.name}]]</p><br>
+  <p>Name: <a th:href="@{/{id} (id=${student.id})}">[[${student.name}]]</a></p><br>
   <p>Email: [[${student.email}]]</p><br>
 </div>
 <a href="/create-view">Create</a>
