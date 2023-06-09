@@ -20,6 +20,7 @@ public class StudentController {
     public String createView() {
         return "create";
     }
+
     @PostMapping("/create")
     public String create(
             @RequestParam("name") String name,
@@ -49,7 +50,7 @@ public class StudentController {
     }
 
     @GetMapping("/{id}/update-view")
-    public String updateView(@PathVariable("id") Long id, Model model){
+    public String updateView(@PathVariable("id") Long id, Model model) {
         model.addAttribute(
                 "student",
                 studentService.readStudent(id));
@@ -73,5 +74,17 @@ public class StudentController {
         StudentDto studentDto = studentService.readStudent(id);
         model.addAttribute("student", studentDto);
         return "delete";
+    }
+
+    @PostMapping("/{id}/delete")
+    public String delete(
+            @PathVariable("id")
+            Long id
+    ) {
+        studentService.deleteStudent(id);
+        // update 때는 데이터가 남아있지만
+        // delete 는 돌아갈 상세보기가 없다
+        // 그래서 홈으로 돌아간다.
+        return "redirect:/home";
     }
 }

@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Delete Student [[${student.name}]]?</h1>
-<form action="" method="post">
+<form th:action="@{/{id}/delete (id=${student.id})}" method="post">
     <!-- create, update와는 다르게 -->
     <!-- delete는 추가적인 데이터를 필요로 하지 않는다 -->
     <!-- 그래서 추가적인 input 요소 없이 input type = "submit" 만 존재 -->
