@@ -21,4 +21,13 @@ public class StudentService {
     public List<StudentDto> readStudentAll() {
         return this.studentDtoList;
     }
+
+    public StudentDto readStudent(Long id) {
+        for (StudentDto student: studentDtoList) {
+            if (student.getId().equals(id)) {
+                return student;
+            }
+        }
+        return null;
+    }
 }
