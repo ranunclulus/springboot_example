@@ -62,7 +62,7 @@ public class StudentController {
             @RequestParam("name") String name,
             @RequestParam("email") String email
     ) {
-        StudentDto studentDto = studentService.updateStudent(id, name, email);
+        studentService.updateStudent(id, name, email);
         return "redirect:/{id}";
     }
 }

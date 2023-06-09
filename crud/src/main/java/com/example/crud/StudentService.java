@@ -37,7 +37,7 @@ public class StudentService {
         return null;
     }
 
-    public StudentDto updateStudent(Long id, String name, String email) {
+    public void updateStudent(Long id, String name, String email) {
         /*
         for (StudentDto student: studentDtoList) {
             if(student.getId().equals(id)){
@@ -59,8 +59,7 @@ public class StudentService {
         if(target != -1) {
             studentDtoList.get(target).setName(name);
             studentDtoList.get(target).setEmail(email);
-            return studentDtoList.get(target);
+
         }
-        else return null;
     }
 }
