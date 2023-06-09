@@ -11,6 +11,12 @@ public class StudentService {
     // 복수의 StudentDto를 담는 변수
     private final List<StudentDto> studentDtoList = new ArrayList<>();
     private long nextId = 1L;
+
+    public StudentService() {
+        createStudent("alex", "alex@gmail.com");
+        createStudent("brad", "brad@gmail.com");
+        createStudent("chad", "chad@gmail.com");
+    }
     // 새로운 StudentDto를 생성하는 메소
     public StudentDto createStudent(String name, String email) {
         StudentDto studentDto = new StudentDto(nextId++, name, email);
