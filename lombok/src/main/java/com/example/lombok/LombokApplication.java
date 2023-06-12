@@ -7,7 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class LombokApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LombokApplication.class, args);
+		
+		//SpringApplication.run(LombokApplication.class, args);
+		StudentDto dto = new StudentDto(1L, "huisu", "huisu@gmail.com");
 	}
-
 }
