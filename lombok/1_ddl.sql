@@ -45,4 +45,19 @@ create table students_final (
     first_name text,
     last_name text,
     email text not null
-)
+);
+
+-- alter table
+alter table students_2 rename to students_temp;
+alter table students_temp rename column first_name to given_name;
+alter table students_temp rename column last_name to sur_name;
+
+alter table students_temp add column phone varchar(64);
+alter table students_temp add column phone_2 varchar(64) not null default '010-0000-0000';
+alter table students_temp drop column phone;
+
+-- 거의 하지 말아야 할 것 drop table
+drop table students_temp;
+
+
+-- D
