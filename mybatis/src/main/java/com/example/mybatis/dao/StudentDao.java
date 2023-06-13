@@ -1,6 +1,7 @@
 package com.example.mybatis.dao;
 
 import com.example.mybatis.mapper.StudentMapper;
+import com.example.mybatis.mapper.StudentXmlMapper;
 import com.example.mybatis.model.Student;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -36,10 +37,10 @@ public class StudentDao {
         }
     }
 
-    public Student updateStudent(Long id) {
+    public List<Student> readAllXml() {
         try (SqlSession session = sessionFactory.openSession()) {
-            StudentMapper studentMapper = session.getMapper(StudentMapper.class);
-            return studentMapper.selectStudent(id);
+            StudentXmlMapper studentMapper = session.getMapper(StudentXmlMapper.class);
+            return studentMapper.selectStudentAll();
         }
     }
 }

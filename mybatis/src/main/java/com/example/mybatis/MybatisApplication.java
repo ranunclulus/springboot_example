@@ -15,18 +15,8 @@ public class MybatisApplication {
 				SpringApplication.run(MybatisApplication.class, args);
 
 		StudentDao dao = applicationContext.getBean(StudentDao.class);
-		System.out.println(dao.readStudentsAll());
-        /*
-		Student student = new Student();
-		student.setName("dave");
-		student.setAge(40);
-		student.setPhone("010-1111-2222");
-		student.setEmail("dave@gmail.com");
-		dao.createStudent(student);
-		System.out.println(dao.readStudentsAll());
-		*/
+		System.out.println(dao.readAllXml());
 
-		System.out.println(dao.readStudent(1L));
 	}
 
 }

@@ -5,7 +5,7 @@ spring:
  #   username:
  #   password:
 mybatis:
-  mapper-locations: "classmath:mybatis/mappers/*.xml"
+  mapper-locations: "classpath:mybatis/mappers/*.xml"
   type-aliases-package: "com.example.mybatis.model"
   configuration:
     map-underscore-to-camel-case: true
