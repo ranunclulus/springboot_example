@@ -15,6 +15,17 @@ public class AppController {
         this.service = service;
     }
 
+    @GetMapping("create")
+    public @ResponseBody String create() {
+        this.service.createStudent(
+                "alex",
+                35,
+                "010-1234-5678",
+                "alex@gmail.com"
+        );
+        return "done";
+    }
+/*
     @RequestMapping("student")
     public void student() {
         List<Object> result = service.readStudentAll();
@@ -29,4 +40,6 @@ public class AppController {
     public @ResponseBody String body() {
         return "body";
     }
+
+ */
 }
