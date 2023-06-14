@@ -37,6 +37,18 @@ public class AppController {
         this.service.readStudent(1L);
         return "done-read-one";
     }
+
+    @GetMapping("update")
+    public @ResponseBody String update() {
+        this.service.updateStudent(1L, "alexander");
+        return "done-update";
+    }
+
+    @GetMapping("delete")
+    public @ResponseBody String delete() {
+        this.service.deleteStudent(1L);
+        return "done-delete";
+    }
 /*
     @RequestMapping("student")
     public void student() {
