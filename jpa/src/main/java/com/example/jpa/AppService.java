@@ -33,12 +33,22 @@ public class AppService {
     }
 
     // READ
+    public void readStudent(Long id) {
+        System.out.println(this.studentRepository.findById(id));
+    }
+
     // READ ALL
+    public void readStudentAll() {
+        System.out.println(this.studentRepository.findAll());
+    }
     // UPDATE
     // DELETE
 
+    /*
     public List<Object> readStudentAll() {
         List<Object> queryResult = repository.selectStudentAll();
         return queryResult;
     }
+
+     */
 }

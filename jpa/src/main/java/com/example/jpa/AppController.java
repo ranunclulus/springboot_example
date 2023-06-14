@@ -25,6 +25,18 @@ public class AppController {
         );
         return "done";
     }
+
+    @GetMapping("read-all")
+    public @ResponseBody String readAll() {
+        this.service.readStudentAll();
+        return "done-read-all";
+    }
+
+    @GetMapping("read")
+    public @ResponseBody String readOne() {
+        this.service.readStudent(1L);
+        return "done-read-one";
+    }
 /*
     @RequestMapping("student")
     public void student() {
