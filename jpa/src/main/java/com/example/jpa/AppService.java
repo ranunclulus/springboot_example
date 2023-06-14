@@ -87,6 +87,44 @@ public class AppService {
         }
     }
 
+    // findALlBy
+    public void findAllByTest() {
+        System.out.println("findAllByOrderByName");
+        List<StudentEntity> studentEntities =
+                this.studentRepository.findAllByOrderByAge();
+        for (int i = 0; i < 5; i++) {
+            System.out.println(studentEntities.get(i));
+        }
+        System.out.println("------------");
+
+
+        System.out.println("findAllByOrderByNameDesc");
+        List<StudentEntity> studentEntitiesDesc =
+                this.studentRepository.findAllByOrderByAgeDesc();
+        for (int i = 0; i < 5; i++) {
+            System.out.println(studentEntitiesDesc.get(i));
+        }
+        System.out.println("------------");
+
+
+        System.out.println("findAllByAgeLessThan");
+        List<StudentEntity> studentEntitiesLessThan =
+                this.studentRepository.findAllByAgeLessThan(21);
+        for (int i = 0; i < 5; i++) {
+            System.out.println(studentEntitiesLessThan.get(i));
+        }
+        System.out.println("------------");
+
+
+        System.out.println("findAllByPhoneStartingWith");
+        List<StudentEntity> studentEntitiesPhone =
+                this.studentRepository.findAllByPhoneStartingWith("010-1");
+        for (int i = 0; i < 5; i++) {
+            System.out.println(studentEntitiesPhone.get(i));
+        }
+        System.out.println("------------");
+    }
+
     /*
     public List<Object> readStudentAll() {
         List<Object> queryResult = repository.selectStudentAll();
