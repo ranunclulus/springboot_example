@@ -1,9 +1,11 @@
 package com.example.jpa;
 
+import com.example.jpa.dto.StudentDto;
 import com.example.jpa.entities.StudentEntity;
 import com.example.jpa.repos.StudentRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,12 +52,18 @@ public class AppService {
     }
 
     // READ ALL
-    public List<StudentEntity> readStudentAll() {
-
-        System.out.println(this.studentRepository.findAll());
-        List<StudentEntity> studentEntityList = this.studentRepository.findAll();
-        return studentEntityList;
-    }
+    public List<StudentDto> readStudentAll() {
+        List<StudentDto> studentDtoList = new ArrayList<>();
+        for (StudentEntity studentEntity:
+             this.studentRepository.findAll()) {
+            StudentDto studentDto = new StudentDto();
+            studentDto.setId(studentEntity.getId());
+            studentDto.setEmail(studentEntity.getEmail());
+            studentDto.setName(studentEntity.getName());
+            studentDtoList.add(studentDto);
+        }
+        return studentDtoList;
+    }ㄴ
 
     // UPDATE
     // 어떤 학생을 수정할 것인지 지정 필요

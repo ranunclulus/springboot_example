@@ -1,5 +1,6 @@
 package com.example.jpa;
 
+import com.example.jpa.dto.StudentDto;
 import com.example.jpa.entities.StudentEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,7 @@ public class AppController {
     }
 
     @GetMapping("read-all")
-    public @ResponseBody List<StudentEntity> readAll() {
+    public @ResponseBody List<StudentDto> readAll() {
         this.service.readStudentAll();
         //return "done-read-all";
         return this.service.readStudentAll();
