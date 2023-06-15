@@ -20,7 +20,7 @@ public class AppService {
     }
 
     // CREATE
-    public void createStudent(
+    public StudentDto createStudent(
             String name,
             Integer age,
             String phone,
@@ -32,7 +32,9 @@ public class AppService {
         newEntity.setAge(age);
         newEntity.setPhone(phone);
         newEntity.setEmail(email);
-        this.studentRepository.save(newEntity);
+        // save() 메소드는 생성된 엔티티를 반환한다
+        newEntity = this.studentRepository.save(newEntity);
+        return StudentDto.fromEntity(newEntity);
     }
 
     // READ
@@ -125,11 +127,11 @@ public class AppService {
         System.out.println("------------");
     }
 
-    /*
+
     public List<Object> readStudentAll() {
         List<Object> queryResult = repository.selectStudentAll();
         return queryResult;
     }
 
-     */
+
 }
