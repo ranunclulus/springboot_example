@@ -1,5 +1,6 @@
 package com.example.jpa;
 
+import com.example.jpa.entities.StudentEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,9 +28,10 @@ public class AppController {
     }
 
     @GetMapping("read-all")
-    public @ResponseBody String readAll() {
+    public @ResponseBody List<StudentEntity> readAll() {
         this.service.readStudentAll();
-        return "done-read-all";
+        //return "done-read-all";
+        return this.service.readStudentAll();
     }
 
     @GetMapping("read")
