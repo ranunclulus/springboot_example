@@ -52,18 +52,7 @@ public class AppService {
     }
 
     // READ ALL
-    public List<StudentDto> readStudentAll() {
-        List<StudentDto> studentDtoList = new ArrayList<>();
-        for (StudentEntity studentEntity:
-             this.studentRepository.findAll()) {
-            StudentDto studentDto = new StudentDto();
-            studentDto.setId(studentEntity.getId());
-            studentDto.setEmail(studentEntity.getEmail());
-            studentDto.setName(studentEntity.getName());
-            studentDtoList.add(studentDto);
-        }
-        return studentDtoList;
-    }ㄴ
+
 
     // UPDATE
     // 어떤 학생을 수정할 것인지 지정 필요
