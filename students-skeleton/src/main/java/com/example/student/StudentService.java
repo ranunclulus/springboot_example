@@ -75,6 +75,11 @@ public class StudentService {
 
     // DELETE
     public void deleteStudent(Long id) {
-        this.repository.deleteById(id);
+        if(this.repository.existsById(id)){
+            this.repository.deleteById(id);
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 }
