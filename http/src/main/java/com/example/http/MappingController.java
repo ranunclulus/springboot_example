@@ -44,4 +44,16 @@ public class MappingController {
         log.info("POST /path with x-likelion=hello");
         return "index";
     }
+
+    // '/path'로 오는 POST 요청이면서
+    // Query Parameter로 likelion이 hello인 요청
+    @RequestMapping(
+            value = "/path",
+            method = RequestMethod.POST,
+            params = "likelion=hello"
+    )
+    public String params() {
+        log.info("POST /path with parameter likelion=hello");
+        return "index";
+    }
 }
