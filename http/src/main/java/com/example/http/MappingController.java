@@ -33,4 +33,15 @@ public class MappingController {
         return "index";
     }
 
+    // '/path'로 오는 POST 요청이면서
+    // 헤더에 x-likelion이라는 값이 hello로 지정되어 있을 때
+    @RequestMapping(
+            value = "/path",
+            method = RequestMethod.POST,
+            headers = "x-likelion=hello"
+    )
+    public String headerWith() {
+        log.info("POST /path with x-likelion=hello");
+        return "index";
+    }
 }
