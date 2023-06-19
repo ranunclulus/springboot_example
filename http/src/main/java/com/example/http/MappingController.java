@@ -32,4 +32,5 @@ public class MappingController {
         log.info("PUT or DELETE /path");
         return "index";
     }
+
 }
