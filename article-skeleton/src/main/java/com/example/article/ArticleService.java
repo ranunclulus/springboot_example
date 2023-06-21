@@ -5,6 +5,7 @@ import com.example.article.entity.ArticleEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
@@ -63,6 +64,12 @@ public class ArticleService {
     }
 
     public void deleteArticle(Long id) {
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        Optional<ArticleEntity> target = repository.findById(id);
+        if(target.isPresent()) {
+            repository.delete(target.get());
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
     }
 }
