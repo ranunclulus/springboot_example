@@ -1,11 +1,13 @@
 package com.example.article;
 
 import com.example.article.dto.ArticleDto;
+import com.example.article.entity.ArticleEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,7 +16,11 @@ public class ArticleService {
     private final ArticleRepository repository;
 
     public ArticleDto createArticle(ArticleDto dto) {
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        ArticleEntity articleEntity = new ArticleEntity();
+        articleEntity.setTitle(dto.getTitle());
+        articleEntity.setContent(dto.getContent());
+        articleEntity.setWriter(dto.getWriter());
+        return ArticleDto.fromEntity(repository.save(articleEntity));
     }
 
     public ArticleDto readArticle(Long id) {
@@ -22,7 +28,15 @@ public class ArticleService {
     }
 
     public List<ArticleDto> readArticleAll() {
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        List<ArticleDto> articleDtos = new ArrayList<>();
+        for (ArticleEntity entity : repository.findAll()) {
+            ArticleDto articleDto = new ArticleDto();
+            articleDto.setTitle(entity.getTitle());
+            articleDto.setContent(entity.getContent());
+            articleDto.setWriter(entity.getWriter());
+            articleDtos.add(articleDto);
+        }
+        return articleDtos;
     }
 
     public ArticleDto updateArticle(Long id, ArticleDto dto) {
