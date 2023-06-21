@@ -3,10 +3,7 @@ package com.example.article;
 import com.example.article.dto.ArticleDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,9 +31,20 @@ public class ArticleController {
     }
 
     // GET /articles/{id}
+    @GetMapping("/articles/{id}")
+    public ArticleDto read(@PathVariable("id") Long id) {
+        return service.readArticle(id);
+    }
 
 
     // PUT /articles/{id}
+    @PutMapping("/articles/{id}")
+    public ArticleDto update(
+            @PathVariable("id") Long id,
+            @RequestBody ArticleDto dto
+            ) {
+        return service.updateArticle(id, dto);
+    }
 
 
     // DELETE /articles/{id}
