@@ -1,6 +1,6 @@
-package com.example.comment.dto;
+package com.example.article.dto;
 
-import com.example.comment.entity.CommentEntity;
+import com.example.article.entity.CommentEntity;
 import lombok.Data;
 
 @Data

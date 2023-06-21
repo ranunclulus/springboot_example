@@ -1,4 +1,4 @@
-package com.example.comment.entity;
+package com.example.article.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
