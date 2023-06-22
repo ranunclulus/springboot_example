@@ -14,4 +14,6 @@ public class CommentEntity {
     private Long articleId;
     private String writer;
     private String content;
+    //@ManyToOne
+    //private ArticleEntity article;
 }

@@ -32,7 +32,23 @@ public class CommentController {
 
     // TODO 게시글 댓글 수정
     // PUT /articles/{articleID}/comments/{commentId}
+    @PutMapping("{commentId}")
+    public CommentDto update(
+            @PathVariable("articleId") Long articleId,
+            @PathVariable("commentId") Long commentId,
+            @RequestBody CommentDto dto
+    ) {
+        return commentService.updateComment(articleId, commentId, dto);
+    }
 
     // TODO 게시글 댓글 삭제
     // DELETE /articles/{articleID}/comments/{commentID}
+    @DeleteMapping("/{commentId}")
+    public void delete(
+            @PathVariable("articleId") Long articleId,
+            @PathVariable("commentId") Long commentId
+    ) {
+        commentService.deleteComment(articleId, commentId);
+    }
+
 }

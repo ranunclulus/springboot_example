@@ -71,4 +71,20 @@ public class CommentService {
 
 
     // TODO 게시글 댓글 삭제
+    public void deleteComment(
+            Long articleId,
+            Long commentId
+    ) {
+        Optional<CommentEntity> commentEntity
+                = commentRepository.findById(commentId);
+        if(commentEntity.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+        CommentEntity comment = commentEntity.get();
+
+        if(!articleId.equals(comment.getArticleId()))
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+
+        commentRepository.deleteById(commentId);
+    }
 }
