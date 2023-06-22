@@ -65,4 +65,13 @@ public class ArticleController {
         return service.readArticlePages();
     }
 
+    @GetMapping("/search")
+    public Page<ArticleDto> search(
+            @RequestParam("query") String query,
+            @RequestParam(value = "page", defaultValue = "0")
+            Integer pageNumber
+    ) {
+        return service.search(query, pageNumber);
+    }
+
 }

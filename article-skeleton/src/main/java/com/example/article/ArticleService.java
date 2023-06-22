@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
@@ -130,5 +129,17 @@ public class ArticleService {
         Page<ArticleDto> articleDtoPage =
                 articleEntityPage.map(ArticleDto::fromEntity);
         return articleDtoPage;
+    }
+
+    public Page<ArticleDto> search(
+            String query,
+            Integer pageNumber
+    ) {
+        Pageable pageable = PageRequest.of(
+                pageNumber,
+                20,
+                Sort.by("id").descending());
+        return repository.findAllByTitleContains(query, pageable)
+                .map(ArticleDto::fromEntity);
     }
 }
