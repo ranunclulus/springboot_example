@@ -10,12 +10,12 @@ public class CommentDto {
     private String writer;
     private String content;
 
-    public static CommentDto fromEntity(CommentEntity commentEntity){
-        CommentDto commentDto = new CommentDto();
-        commentDto.setId(commentEntity.getId());
-        commentDto.setArticleId(commentEntity.getArticleId());
-        commentDto.setContent(commentEntity.getContent());
-        commentDto.setWriter(commentEntity.getWriter());
-        return commentDto;
+    public static CommentDto fromEntity(CommentEntity entity){
+        CommentDto dto = new CommentDto();
+        dto.setId(entity.getId());
+        dto.setArticleId(entity.getArticleId());
+        dto.setWriter(entity.getWriter());
+        dto.setContent(entity.getContent());
+        return dto;
     }
 }
