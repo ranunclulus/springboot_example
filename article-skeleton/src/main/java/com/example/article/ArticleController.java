@@ -27,10 +27,13 @@ public class ArticleController {
     }
 
 
-    // GET /articles
+    // GET /articles?page=3&size=20
     @GetMapping
-    public List<ArticleDto> readAll() {
-        return service.readArticleAll();
+    public Page<ArticleDto> readAll(
+            @RequestParam("page") Integer page,
+            @RequestParam("size") Integer size
+    ) {
+        return service.readArticlePages(page, size);
     }
 
     // GET /articles/{id}
@@ -58,7 +61,7 @@ public class ArticleController {
 
     // GET /articles/page-test
     @GetMapping("/page-test")
-    public List<ArticleDto> readPageTest() {
+    public Page<ArticleDto> readPageTest() {
         return service.readArticlePages();
     }
 

@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -85,8 +86,12 @@ public class ArticleService {
         return articleDtos;
     }*/
 
-    public List<ArticleDto> readArticlePages() {
-        Pageable pageable = PageRequest.of(0, 20);
+ /*   public List<ArticleDto> readArticlePages() {
+        Pageable pageable = PageRequest.of(
+                0,
+                20,
+                Sort.by("id").descending());
+
         Page<ArticleEntity> articleEntityPage =
                 repository.findAll(pageable);
 
@@ -97,5 +102,33 @@ public class ArticleService {
         }
 
        return articleDtoList;
+    }*/
+
+    public Page<ArticleDto> readArticlePages() {
+        Pageable pageable = PageRequest.of(
+                0,
+                20,
+                Sort.by("id").descending());
+
+        Page<ArticleEntity> articleEntityPage =
+                repository.findAll(pageable);
+
+        Page<ArticleDto> articleDtoPage =
+                articleEntityPage.map(ArticleDto::fromEntity);
+        return articleDtoPage;
+    }
+
+    public Page<ArticleDto> readArticlePages(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(
+                page,
+                size,
+                Sort.by("id").descending());
+
+        Page<ArticleEntity> articleEntityPage =
+                repository.findAll(pageable);
+
+        Page<ArticleDto> articleDtoPage =
+                articleEntityPage.map(ArticleDto::fromEntity);
+        return articleDtoPage;
     }
 }
