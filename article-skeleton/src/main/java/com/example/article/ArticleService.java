@@ -85,12 +85,17 @@ public class ArticleService {
         return articleDtos;
     }*/
 
-    public Page<ArticleEntity> readArticlePages() {
+    public List<ArticleDto> readArticlePages() {
         Pageable pageable = PageRequest.of(0, 20);
         Page<ArticleEntity> articleEntityPage =
                 repository.findAll(pageable);
 
+        List<ArticleDto> articleDtoList = new ArrayList<>();
+        for (ArticleEntity entity:
+             articleEntityPage) {
+            articleDtoList.add(ArticleDto.fromEntity(entity));
+        }
 
-       return articleEntityPage;
+       return articleDtoList;
     }
 }

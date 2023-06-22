@@ -58,7 +58,7 @@ public class ArticleController {
 
     // GET /articles/page-test
     @GetMapping("/page-test")
-    public Page<ArticleEntity> readPageTest() {
+    public List<ArticleDto> readPageTest() {
         return service.readArticlePages();
     }
 
