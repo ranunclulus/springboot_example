@@ -1,8 +1,10 @@
 package com.example.article;
 
 import com.example.article.dto.ArticleDto;
+import com.example.article.entity.ArticleEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -52,6 +54,12 @@ public class ArticleController {
     @DeleteMapping("/{id}")
     public void delete(@PathVariable("id") Long id) {
         service.deleteArticle(id);
+    }
+
+    // GET /articles/page-test
+    @GetMapping("/page-test")
+    public Page<ArticleEntity> readPageTest() {
+        return service.readArticlePages();
     }
 
 }
