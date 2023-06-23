@@ -38,13 +38,23 @@ public class UserService {
 
     // readUserByUsername
     public UserDto readUserByUsername(String username) {
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        Optional<UserEntity> userEntity = repository.findByUsername(username);
+        if (userEntity.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        return UserDto.fromEntity(userEntity.get());
     }
 
     // updateUser
     public UserDto updateUser(Long id, UserDto dto) {
-        // update user로 사용자 이름은 업데이트할 수 없도록
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        // update user로 사용자 이름은 업데이트할 수 없음
+        Optional<UserEntity> optionalUser = repository.findById(id);
+        if (optionalUser.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        UserEntity userEntity = optionalUser.get();
+        userEntity.setEmail(dto.getEmail());
+        userEntity.setBio(dto.getBio());
+        userEntity.setEmail(dto.getEmail());
+        return UserDto.fromEntity(repository.save(userEntity));
     }
 
     // updateUserAvatar

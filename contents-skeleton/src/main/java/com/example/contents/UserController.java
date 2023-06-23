@@ -53,6 +53,8 @@ public class UserController {
     ) throws IOException {
         return service.updateUserAvatar(id, avatarImage);
     }
+
+    @ExceptionHandler
 }
 
 
