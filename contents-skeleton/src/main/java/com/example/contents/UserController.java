@@ -3,6 +3,7 @@ package com.example.contents;
 import com.example.contents.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,7 +43,10 @@ public class UserController {
 
     // PUT /user/{id}/avatar
     // 사용자 프로필 이미지 설정
-    @PutMapping("/{id}/avatar")
+    @PutMapping(
+            value = "/{id}/avatar",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE
+    )
     public UserDto avatar(
             @PathVariable("id") Long id,
             @RequestParam("image") MultipartFile avatarImage
