@@ -55,12 +55,6 @@ public class UserController {
         return service.updateUserAvatar(id, avatarImage);
     }
 
-    @ExceptionHandler(IllegalStateException.class)
-    public ResponseDto handleIllegalState(IllegalStateException exception) {
-        ResponseDto responseDto = new ResponseDto();
-        responseDto.setMessage("이러저러한 이유로 에러가 발생했습니다.");
-        return responseDto;
-    }
 }
 
 
