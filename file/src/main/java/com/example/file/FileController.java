@@ -12,7 +12,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 
 @Slf4j
 @RestController
@@ -23,17 +25,15 @@ public class FileController {
             @RequestParam("name") String name,
             @RequestParam("photo")MultipartFile multipartFile
             ) throws IOException {
-        /*// 컴퓨터에서 파일 경로를 관리하기 위해 만들어진 인터페이스
-        Path uploadTo = Path.of("filename.png");
+        // 저장할 파일 경로 생성
+        Files.createDirectories(Path.of("media"));
+        // 저장할 파일 이름을 포함한 경로를 작성한다.
+
+        LocalDateTime now = LocalDateTime.now();
+        log.info(now.toString());
+        Path uploadTo = Path.of(String.format("media/%s.png", now));
         multipartFile.transferTo(uploadTo);
-*/
-        // 넘겨 받은 파일을 바이트 어레이로 사용할 수 있음
-        File file = new File("./filename.png");
-        try (OutputStream outputStream = new FileOutputStream(file)){
-            byte[] fileBytes = multipartFile.getBytes();
-            // 여기에서 byte[]를 활용
-            outputStream.write(fileBytes);
-        }
+
         ResponseDto response = new ResponseDto();
         response.setMessage("success");
         return response;
