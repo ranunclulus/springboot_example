@@ -24,7 +24,7 @@ public class UserService {
     public UserDto createUser(UserDto dto) {
         // 회원가입 => 프로필 이미지가 아직 필요 없다
         if (repository.existsByUsername(dto.getUsername())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new IllegalStateException();
         }
         UserEntity userEntity = new UserEntity();
         userEntity.setId(dto.getId());
