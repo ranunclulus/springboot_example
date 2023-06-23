@@ -1,12 +1,18 @@
 package com.example.contents;
 
 import com.example.contents.dto.UserDto;
+import com.example.contents.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -16,6 +22,7 @@ public class UserService {
 
     // createUser
     public UserDto createUser(UserDto dto) {
+        // 회원가입 => 프로필 이미지가 아직 필요 없다
         throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
     }
 
@@ -31,7 +38,31 @@ public class UserService {
     }
 
     // updateUserAvatar
-    public UserDto updateUserAvatar(Long id, MultipartFile avatarImage) {
+    public UserDto updateUserAvatar(Long id, MultipartFile avatarImage) throws IOException {
+        // 2. 사용자가 프로필 이미지를 업로드한다.
+
+        // TODO 유저 존재 확인
+        Optional<UserEntity> optionalUser = repository.findById(id);
+        if(optionalUser.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+        // TODO 파일을 어디에 업로드할 건지 => /media/{userId}/profile.{파일확장자}
+        try {
+            Files.createDirectories(Path.of(String.format("medis/%d", id)));
+        } catch (IOException exception) {
+            log.error(exception.getMessage());
+            throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        }
+        // TODO 확장자를 포함한 이미지 이름 만들기 (profile.{확장자})
+        String originalFilename = avatarImage.getOriginalFilename();
+        // profile.png -> [profile, png]s
+        String[] filenameSplit = originalFilename.split("\\.");
+        String extension = filenameSplit[filenameSplit.length - 1];
+        String profileFilename = "profile" + extension;
+        log.info(profileFilename);
+
+        // TODO 업로드 후 객체에 할당
+
         throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
     }
 }
