@@ -23,7 +23,17 @@ public class UserService {
     // createUser
     public UserDto createUser(UserDto dto) {
         // 회원가입 => 프로필 이미지가 아직 필요 없다
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        if (repository.existsByUsername(dto.getUsername())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(dto.getId());
+        userEntity.setUsername(dto.getUsername());
+        userEntity.setEmail(dto.getEmail());
+        userEntity.setPhone(dto.getPhone());
+        userEntity.setBio(dto.getBio());
+        userEntity.setAvatar(null);
+        return UserDto.fromEntity(repository.save(userEntity));
     }
 
     // readUserByUsername
@@ -33,7 +43,7 @@ public class UserService {
 
     // updateUser
     public UserDto updateUser(Long id, UserDto dto) {
-
+        // update user로 사용자 이름은 업데이트할 수 없도록
         throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
     }
 
@@ -65,7 +75,7 @@ public class UserService {
         // TODO 폴더와 파일 경로를 포함한 이름 만들기
         String profilePath = profileDir + profileFilename;
 
-        // TODO 업로드 후 객체에 할당
+        // TODO 업로드
         try {
             avatarImage.transferTo(Path.of(profilePath));
         } catch (IOException exception) {
@@ -73,6 +83,9 @@ public class UserService {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        throw new ResponseStatusException(HttpStatus.NOT_IMPLEMENTED);
+        // TODO User Entity Update
+        UserEntity userEntity = optionalUser.get();
+        userEntity.setAvatar(String.format("/static/%d/%s", id, profileFilename));
+        return UserDto.fromEntity(repository.save(userEntity));
     }
 }
