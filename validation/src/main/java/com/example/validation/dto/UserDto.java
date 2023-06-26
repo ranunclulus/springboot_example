@@ -1,5 +1,6 @@
 package com.example.validation.dto;
 
+import com.example.validation.constraints.annotations.BlackList;
 import com.example.validation.constraints.annotations.EmailWhiteList;
 import com.example.validation.constraints.annotations.Phone010;
 import jakarta.validation.constraints.*;
@@ -13,6 +14,7 @@ public class UserDto {
     private Long id;
 
     @NotBlank // 비어 있지 않음
+    @BlackList(blacklist = {"malware.good", "trojan.jjang"})
     private String username;
     @Email // 형식이 이메일이어야 한다
     @EmailWhiteList
