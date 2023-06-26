@@ -9,6 +9,6 @@ public class Phone010Validator
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        return value.substring(0, 2).equals("010");
+        return value.startsWith("010") || value.startsWith("010-");
     }
 }
