@@ -17,7 +17,7 @@ public class UserDto {
     @NotNull
     private String phone;
     @NotNull
-    @Min(14)
+    @Min(value = 14, message = "14세 미만은 부모님의 동의가 필요합니다.")
     private Integer age;
     @Future
     private LocalDate validUntil;
