@@ -15,7 +15,16 @@ public class LoggingAspect {
     // @Before: Advice, 실제로 실행될 코드를 나타냄
     // @Before.value: Pointcut Designator, 어느 Joint point에서 실행될 것인
     // AopController가 실행되는 시점에 로그가 작동
-    @Before("this(com.example.aop.controller.AopController)")
+
+    // this: 클래스의 구현체 instance 지정
+    // @Before("this(com.example.aop.controller.AopController)")
+
+    // within: 클래스 또는 패키지 지정
+    // @Before("within(com.example.aop.controller..*)")
+    // @Before("within(com.example.aop.controller.AopController)")
+
+    // @annotation: 어노테이션 지정
+    @Before("@annotation(com.example.aop.aspect.LogArguments)")
     public void logParameter(JoinPoint joinPoint) {
         // 실행된 메소드의 정보를 담는 객체
         MethodSignature methodSignature =
@@ -31,6 +40,4 @@ public class LoggingAspect {
             log.info("argument: [{}]", arguments);
         }
     }
-
-    // within: zmffotm Ehsms voz
 }

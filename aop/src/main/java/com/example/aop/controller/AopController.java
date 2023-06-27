@@ -1,5 +1,6 @@
 package com.example.aop.controller;
 
+import com.example.aop.aspect.LogArguments;
 import com.example.aop.dto.ResponseDto;
 import com.example.aop.dto.UserDto;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class AopController {
 
+    @LogArguments
     @PostMapping("/users")
     public ResponseDto addUser(
             @RequestBody UserDto user
