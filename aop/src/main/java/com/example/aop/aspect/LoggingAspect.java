@@ -2,6 +2,8 @@ package com.example.aop.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -28,16 +30,37 @@ public class LoggingAspect {
     public void logParameter(JoinPoint joinPoint) {
         // 실행된 메소드의 정보를 담는 객체
         MethodSignature methodSignature =
-                (MethodSignature)joinPoint.getSignature();
+                (MethodSignature) joinPoint.getSignature();
         log.info(methodSignature.getName());
         Object[] arguments = joinPoint.getArgs();
 
         // 인자가 없을 때
-        if (arguments.length ==0) {
+        if (arguments.length == 0) {
             log.info("no args");
         }
         for (Object argument : arguments) {
             log.info("argument: [{}]", arguments);
         }
+    }
+
+    // 어떤 메소드가 실행되는데 걸리는 시간을 기록하고 싶을 때
+    // @LogExecutionTime 이 붙은 메소드의 실행 시간 기록
+    @Around("@annotation(com.example.aop.aspect.LogExecutionTime)")
+    public Object logExecutionTime(
+            // Advice 내에서 대상 JoinPoint가 실행되도록
+            // 요구할 수 있다
+            ProceedingJoinPoint joinPoint
+    ) throws Throwable {
+        long startTime = System.currentTimeMillis();
+
+        // jointPoint.proceed(): joinpoint에 해당하는 메소드
+        // 진행해 주세요
+        Object proceed = joinPoint.proceed();
+
+        long endTime = System.currentTimeMillis();
+        // 실제로 추가하고 싶은 기능
+        log.info("{} executed in: {}ms",
+                joinPoint.getSignature(), endTime - startTime);
+        return proceed;
     }
 }
