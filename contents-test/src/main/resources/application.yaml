@@ -1,6 +1,6 @@
 spring:
   profiles:
-    default: test # application-test.yaml을 기본으로 사용
+    default: dev # application-test.yaml을 기본으로 사용
   servlet:
     multipart:
       max-file-size: 10MB
