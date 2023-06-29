@@ -1,0 +1,5 @@
+2023-06-29 10:23:27,311 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:27.311751
+2023-06-29 10:23:27,814 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:27.814062
+2023-06-29 10:23:27,950 DEBUG s.r.r.Log$LoggerLog [RMI TCP Connection(2)-127.0.0.1] RMI TCP Connection(2)-127.0.0.1: (port 59947) connection closed
+2023-06-29 10:23:27,951 DEBUG s.r.r.Log$LoggerLog [RMI TCP Connection(2)-127.0.0.1] RMI TCP Connection(2)-127.0.0.1: close connection, socket: Socket[addr=/127.0.0.1,port=59949,localport=59947]
+2023-06-29 10:23:27,951 DEBUG s.r.r.Log$LoggerLog [RMI TCP Connection(2)-127.0.0.1] RMI TCP Connection(2)-127.0.0.1: socket close: Socket[addr=/127.0.0.1,port=59949,localport=59947]

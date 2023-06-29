@@ -1,0 +1,85 @@
+2023-06-29 09:44:25,506 INFO o.s.b.StartupInfoLogger [restartedMain] Starting ContentsApplication using Java 17.0.6 with PID 22276 (/Users/ranunclulus/Desktop/portfolio/likelion/springboot/contents-test/build/classes/java/main started by ranunclulus in /Users/ranunclulus/Desktop/portfolio/likelion/springboot/contents-test)
+2023-06-29 09:44:25,507 DEBUG o.s.b.StartupInfoLogger [restartedMain] Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-06-29 09:44:25,508 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-06-29 09:44:27,120 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-29 09:44:27,334 INFO o.s.b.StartupInfoLogger [restartedMain] Started ContentsApplication in 2.082 seconds (process running for 2.369)
+2023-06-29 10:22:53,117 WARN o.s.b.f.s.DisposableBeanAdapter [SpringApplicationShutdownHook] Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
+2023-06-29 10:22:58,051 INFO o.s.b.StartupInfoLogger [restartedMain] Starting ContentsApplication using Java 17.0.6 with PID 22398 (/Users/ranunclulus/Desktop/portfolio/likelion/springboot/contents-test/build/classes/java/main started by ranunclulus in /Users/ranunclulus/Desktop/portfolio/likelion/springboot/contents-test)
+2023-06-29 10:22:58,053 DEBUG o.s.b.StartupInfoLogger [restartedMain] Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-06-29 10:22:58,055 INFO o.s.b.SpringApplication [restartedMain] No active profile set, falling back to 1 default profile: "default"
+2023-06-29 10:22:59,619 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [restartedMain] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-06-29 10:22:59,805 INFO o.s.b.StartupInfoLogger [restartedMain] Started ContentsApplication in 1.997 seconds (process running for 2.266)
+2023-06-29 10:22:59,808 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:22:59.808109
+2023-06-29 10:23:00,312 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:00.312943
+2023-06-29 10:23:00,812 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:00.812885
+2023-06-29 10:23:01,309 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:01.309808
+2023-06-29 10:23:01,810 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:01.810214
+2023-06-29 10:23:02,312 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:02.312894
+2023-06-29 10:23:02,809 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:02.809446
+2023-06-29 10:23:03,313 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:03.313108
+2023-06-29 10:23:03,810 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:03.810590
+2023-06-29 10:23:04,308 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:04.308553
+2023-06-29 10:23:04,811 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:04.811882
+2023-06-29 10:23:05,312 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:05.312359
+2023-06-29 10:23:05,812 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:05.812847
+2023-06-29 10:23:06,312 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:06.312935
+2023-06-29 10:23:06,811 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:06.811532
+2023-06-29 10:23:07,312 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:07.312517
+2023-06-29 10:23:07,812 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:07.812784
+2023-06-29 10:23:08,312 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:08.312904
+2023-06-29 10:23:08,807 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:08.807869
+2023-06-29 10:23:09,312 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:09.312821
+2023-06-29 10:23:09,808 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:09.808926
+2023-06-29 10:23:10,312 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:10.312862
+2023-06-29 10:23:10,812 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:10.812763
+2023-06-29 10:23:11,313 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:11.313002
+2023-06-29 10:23:11,813 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:11.813359
+2023-06-29 10:23:12,312 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:12.312105
+2023-06-29 10:23:12,810 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:12.810683
+2023-06-29 10:23:13,310 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:13.310620
+2023-06-29 10:23:13,812 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:13.812335
+2023-06-29 10:23:14,310 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:14.310660
+2023-06-29 10:23:14,808 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:14.808933
+2023-06-29 10:23:15,309 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:15.309744
+2023-06-29 10:23:15,815 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:15.814306
+2023-06-29 10:23:16,310 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:16.310736
+2023-06-29 10:23:16,812 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:16.812820
+2023-06-29 10:23:17,313 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:17.313839
+2023-06-29 10:23:17,809 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:17.809128
+2023-06-29 10:23:18,311 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:18.311468
+2023-06-29 10:23:18,813 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:18.813306
+2023-06-29 10:23:19,313 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:19.313308
+2023-06-29 10:23:19,810 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:19.810348
+2023-06-29 10:23:20,308 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:20.308640
+2023-06-29 10:23:20,811 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:20.811702
+2023-06-29 10:23:21,308 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:21.308751
+2023-06-29 10:23:21,811 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:21.811105
+2023-06-29 10:23:22,312 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:22.312869
+2023-06-29 10:23:22,812 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:22.812720
+2023-06-29 10:23:23,310 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:23.310635
+2023-06-29 10:23:23,812 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:23.812656
+2023-06-29 10:23:24,308 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:24.308605
+2023-06-29 10:23:24,808 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:24.808895
+2023-06-29 10:23:25,309 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:25.309491
+2023-06-29 10:23:25,809 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:25.809592
+2023-06-29 10:23:26,310 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:26.310515
+2023-06-29 10:23:26,811 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:26.811834
+2023-06-29 10:23:27,311 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:27.311751
+2023-06-29 10:23:27,814 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:27.814062
+2023-06-29 10:23:28,312 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:28.312770
+2023-06-29 10:23:28,807 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:28.807928
+2023-06-29 10:23:29,309 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:29.309442
+2023-06-29 10:23:29,812 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:29.812651
+2023-06-29 10:23:30,311 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:30.311070
+2023-06-29 10:23:30,812 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:30.812561
+2023-06-29 10:23:31,312 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:31.312767
+2023-06-29 10:23:31,808 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:31.808785
+2023-06-29 10:23:32,310 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:32.310079
+2023-06-29 10:23:32,811 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:32.811864
+2023-06-29 10:23:33,313 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:33.313340
+2023-06-29 10:23:33,810 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:33.810417
+2023-06-29 10:23:34,312 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:34.312470
+2023-06-29 10:23:34,812 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:34.812542
+2023-06-29 10:23:35,308 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:35.308517
+2023-06-29 10:23:35,812 INFO c.e.c.ContentsApplication [pool-2-thread-1] log test 2023-06-29T10:23:35.812447
+2023-06-29 10:23:36,132 WARN o.s.b.f.s.DisposableBeanAdapter [SpringApplicationShutdownHook] Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
