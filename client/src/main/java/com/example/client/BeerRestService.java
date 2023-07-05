@@ -41,4 +41,19 @@ public class BeerRestService {
         log.info(response.getHeaders().toString());
         log.info(response.getBody().toString());
     }
+
+    public void postBeerObject() {
+        // RestTemplate: Spring에서 제공하는 기본 HTTP Client
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "http://localhost:8081/give-me-beer";
+
+        BeerPostDto beerPostDto = new BeerPostDto();
+
+        // post 요청을 보낼 때 responseBody를 같이 전달해야 함
+        MessageDto responseBody = restTemplate.postForObject(
+                url, // 요청 url
+                beerPostDto, // requestBody
+                MessageDto.class); // 응답 해석 타입
+        log.info(responseBody.toString());
+    }
 }

@@ -18,4 +18,9 @@ public class BearRestServiceTest {
     public void testGetBearEntity() {
         service.getBeerEntity();
     }
+
+    @Test
+    public void testPostBearObject() {
+        service.postBeerObject();
+    }
 }
