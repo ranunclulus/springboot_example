@@ -1,5 +1,8 @@
 package com.example.client;
 
+import com.example.client.dto.BeerGetDto;
+import com.example.client.dto.BeerPostDto;
+import com.example.client.dto.MessageDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -57,6 +60,7 @@ public class BeerRestService {
         log.info(responseBody.toString());
 
         // 응답 Body 없이 응답하는 URL
+        // 요청이 정상적으로 처리됐는데 서버에서 굳이 응답해 줄 게 없을 때 -> delete
         url = "http://localhost:8081/give-me-beer-204";
         ResponseEntity<Void> response = restTemplate.postForEntity(
                 url,
