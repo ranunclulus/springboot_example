@@ -23,4 +23,18 @@ public class BeerClientService {
                 .block(); // 동기식으로 처리하겠다
         log.info(response.toString());
     }
+
+    public void postBear() {
+        WebClient webClient = WebClient.builder().build();
+        String url = "http://localhost:8081/give-me-beer";
+
+        BeerPostDto dto = new BeerPostDto();
+        MessageDto responseBody = webClient.post()
+                .uri(url)
+                .bodyValue(dto)
+                .retrieve()
+                .bodyToMono(MessageDto.class)
+                .block();
+        log.info(responseBody.toString());
+    }
 }

@@ -23,4 +23,5 @@ public class BearRestServiceTest {
     public void testPostBearObject() {
         service.postBeerObject();
     }
+
 }

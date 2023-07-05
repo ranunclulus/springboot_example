@@ -13,4 +13,9 @@ public class BearClientServiceTest {
     public void getBeerTest() {
         service.getBeer();
     }
+
+    @Test
+    public void postBeerTest() {
+        service.postBear();
+    }
 }
