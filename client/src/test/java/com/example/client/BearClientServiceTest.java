@@ -21,6 +21,11 @@ public class BearClientServiceTest {
 
     @Test
     public void postBeerTest() {
-        service.postBear();
+        service.postBeer();
+    }
+
+    @Test
+    public void postBeer204Test() {
+        service.postBeer204();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.client;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -41,7 +42,7 @@ public class BeerClientService {
         log.info(response.toString());
     }
 
-    public void postBear() {
+    public void postBeer() {
         WebClient webClient = WebClient.builder().build();
         String url = "http://localhost:8081/give-me-beer";
 
@@ -53,5 +54,19 @@ public class BeerClientService {
                 .bodyToMono(MessageDto.class)
                 .block();
         log.info(responseBody.toString());
+    }
+
+    public void postBeer204() {
+        WebClient webClient = WebClient.builder().build();
+        String url = "http://localhost:8081/give-me-beer";
+
+        BeerPostDto dto = new BeerPostDto();
+        ResponseEntity<Void> response = webClient.post()
+                .uri(url)
+                .bodyValue(dto)
+                .retrieve()
+                .toBodilessEntity() // 응답 바디가 없을 경우
+                .block();
+        log.info(response.getStatusCode().toString());
     }
 }
