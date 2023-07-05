@@ -1,0 +1,44 @@
+package com.example.client;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+@Service
+@Slf4j
+public class BeerRestService {
+    public void getBeerObject() {
+        // RestTemplate:
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://random-data-api.com/api/v2/beers";
+
+        /*
+        // RestTemplate으로 GET 요청
+        String responseBody = restTemplate.getForObject(url, String.class);
+        log.info(responseBody);
+         */
+
+        // @RequestBody -> JSON -> DTO
+        BeerGetDto responseBody
+                = restTemplate.getForObject(url, BeerGetDto.class);
+        log.info(responseBody.toString());
+    }
+
+    // STATUS LINE
+    // RESPONSE HEADER
+    // RESPONSE BODY
+    // HTTP 응답 전체 확인
+    public void getBeerEntity() {
+        // RestTemplate: Spring에서 제공하는 기본 HTTP Client
+        RestTemplate restTemplate = new RestTemplate();
+        String url = "https://random-data-api.com/api/v2/beers";
+
+        // RestController
+        ResponseEntity<BeerGetDto> response =
+                restTemplate.getForEntity(url, BeerGetDto.class);
+        log.info(response.getStatusCode().toString());
+        log.info(response.getHeaders().toString());
+        log.info(response.getBody().toString());
+    }
+}
