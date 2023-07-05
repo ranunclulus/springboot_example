@@ -55,5 +55,13 @@ public class BeerRestService {
                 beerPostDto, // requestBody
                 MessageDto.class); // 응답 해석 타입
         log.info(responseBody.toString());
+
+        // 응답 Body 없이 응답하는 URL
+        url = "http://localhost:8081/give-me-beer-204";
+        ResponseEntity<Void> response = restTemplate.postForEntity(
+                url,
+                beerPostDto,
+                Void.class); // null의 객체화된 클래스
+        log.info(response.getStatusCode().toString());
     }
 }
