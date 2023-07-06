@@ -1,9 +1,18 @@
 package com.example.auth;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+@Slf4j
 @Controller
+@RequestMapping("/users")
 public class UserController {
     // 1. login 페이지로 온다
     // 2. login 페이지에 아이디 비밀번호를 입력한다
@@ -16,5 +25,48 @@ public class UserController {
     @GetMapping("/my-profile")
     public String myProfile() {
         return "my-profile";
+    }
+
+    // 1. 사용자가 register 페이지로 온다
+    // 2. 사용자가 register 페이지에 id, password, password확인을 입력
+    // 3. register 페이지에서 /users/register로 post 요청
+    // 4. UserDetailsManager에 새로운 사용자 정보 추가
+    @GetMapping("/register")
+    public String registerForm() {
+        return "register-form";
+    }
+
+
+
+    // 어떻게 사용자를 관리하는지는
+    // interface 기반으로 의존성 주입
+    private final UserDetailsManager manager;
+    private final PasswordEncoder passwordEncoder;
+
+    public UserController(
+            UserDetailsManager manager,
+            PasswordEncoder passwordEncoder
+    ) {
+        this.manager = manager;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @PostMapping("/register")
+    public String registerPost(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password,
+            @RequestParam("password-check") String passwordCheck
+    ) {
+        if (password.equals(passwordCheck)) {
+            log.info("password match!");
+            // username 중복도 확인해야 하지만,
+            // 이 부분은 Service 에서 진행하는 것도 나쁘지 않아보임
+            manager.createUser(User.withUsername(username)
+                    .password(passwordEncoder.encode(password))
+                    .build());
+            return "redirect:/users/login";
+        }
+        log.warn("password does not match...");
+        return "redirect:/users/register?error";
     }
 }
