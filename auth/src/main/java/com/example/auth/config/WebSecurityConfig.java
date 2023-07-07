@@ -70,7 +70,7 @@ public class WebSecurityConfig {
                 );
         return http.build();
     }
-
+/*
     @Bean
     // 사용자 관리를 위한 인터페이스 구현체 Bean
     public UserDetailsManager userDetailsManager(
@@ -83,6 +83,8 @@ public class WebSecurityConfig {
         // Spring 에서 미리 만들어놓은 사용자 인증 서비스
         return new InMemoryUserDetailsManager(user1);
     }
+
+ */
 
     @Bean
     // 비밀번호 암호화를 위한 Bean
