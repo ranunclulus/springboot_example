@@ -1,5 +1,6 @@
 package com.example.auth;
 
+import com.example.auth.entity.CustomUserDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
@@ -26,6 +27,10 @@ public class UserController {
     @GetMapping("/my-profile")
     public String myProfile(Authentication authentication) {
         log.info(authentication.getName());
+        CustomUserDetails userDetails
+                = (CustomUserDetails) authentication.getPrincipal();
+        log.info(userDetails.getUsername());
+        log.info(userDetails.getEmail());
         return "my-profile";
     }
 

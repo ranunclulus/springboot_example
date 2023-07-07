@@ -1,5 +1,6 @@
 package com.example.auth.service;
 
+import com.example.auth.entity.CustomUserDetails;
 import com.example.auth.entity.UserEntity;
 import com.example.auth.entity.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +24,11 @@ public class JPAUserDetailsManager implements UserDetailsManager {
 
     public JPAUserDetailsManager(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
-        createUser(User.withUsername("user")
+        createUser(CustomUserDetails.builder()
+                .username("user")
                 .password(passwordEncoder.encode("password"))
+                .email("user@gamil.com" )
+                .phone("010-0000-0000")
                 .build());
     }
 
@@ -34,10 +38,12 @@ public class JPAUserDetailsManager implements UserDetailsManager {
         // 이미 있으면
         if(this.userExists(user.getUsername()))
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUsername(user.getUsername());
-        userEntity.setPassword(user.getPassword());
-        this.userRepository.save(userEntity);
+        try {
+            userRepository.save(((CustomUserDetails) user).newEntity());
+        } catch (ClassCastException e) {
+            log.error("failed to cast to {}", CustomUserDetails.class);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
@@ -68,8 +74,6 @@ public class JPAUserDetailsManager implements UserDetailsManager {
         if(optionalUser.isEmpty())
             throw new UsernameNotFoundException(username);
         UserEntity userEntity = optionalUser.get();
-        return User.withUsername(userEntity.getUsername())
-                .password(userEntity.getPassword())
-                .build();
+        return CustomUserDetails.fromEntity(optionalUser.get());
     }
 }
