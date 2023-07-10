@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 
 @Slf4j
+@Component
 // 사용자가 Header에 포함한 JWT를 해석하고
 // 그에 따라 사용자가 인증된 상태인지를 확인하는 용도
 public class JwtTokenFilter extends OncePerRequestFilter {
