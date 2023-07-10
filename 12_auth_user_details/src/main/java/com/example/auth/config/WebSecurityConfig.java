@@ -20,7 +20,8 @@ public class WebSecurityConfig {
                         authHttp -> authHttp
                                 .requestMatchers(
                                         "/no-auth",
-                                        "/users/login"
+                                        "/users/login",
+                                        "/token/issue"
                                 )
                                 .permitAll()
                                 .requestMatchers(
