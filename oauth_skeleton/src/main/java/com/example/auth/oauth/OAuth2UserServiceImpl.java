@@ -42,6 +42,15 @@ public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
         if (registrationId.equals("kakao")) {
             attributes.put("provider", "kakao");
             // 받은 사용자 데이터를 정리한다.
+            attributes.put("provider", "kakao");
+            attributes.put("id", oAuth2User.getAttribute("id"));
+            Map<String, Object> propMap
+                    = oAuth2User.getAttribute("properties");
+            attributes.put("nickname", propMap.get("nickname"));
+            Map<String, Object> accountMap
+                    = oAuth2User.getAttribute("kakao_account");
+            attributes.put("email", accountMap.get("email"));
+            nameAttribute = "email";
         }
         // 기본설정으로는 여기까지 오면 인증 성
         return new DefaultOAuth2User(
