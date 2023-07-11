@@ -19,18 +19,18 @@ public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        // TODO 사용할 데이터 재정의
+        // 사용할 데이터를 다시 정리하는 목적의 Map
         Map<String, Object> attributes = new HashMap<>();
         attributes.put("provider", "naver");
 
-        // 받은 사용자 데이터를 정리
+        // 받은 사용자 데이터를 정리한다.
         Map<String, Object> responseMap = oAuth2User.getAttribute("response");
         attributes.put("id", responseMap.get("id"));
         attributes.put("email", responseMap.get("email"));
         attributes.put("nickname", responseMap.get("nickname"));
         String nameAttribute = "email";
 
-        // 기본적으로 여기까지 오면 인증 성공
+        // 기본설정으로는 여기까지 오면 인증 성공
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority("USER")),
                 attributes,

@@ -18,4 +18,6 @@ public class UserEntity {
 
     private String email;
     private String phone;
+    private String provider;
+    private String providerId;
 }

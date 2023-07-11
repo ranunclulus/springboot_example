@@ -15,42 +15,45 @@ import java.io.IOException;
 
 @Slf4j
 @Component
-//OAuth2 통신이 성공적으로 끝났을 떄 사용하는 클래스
-// JWT를 사용하고 있기 때문에
+// OAuth2 통신이 성공적으로 끝났을 때, 사용하는 클래스
+// JWT를 활용한 인증 구현하고 있기 때문에
 // ID Provider에게 받은 정보를 바탕으로 JWT를 발급하는 역할을 하는 용도
+// JWT를 발급하고 클라이언트가 저장할 수 있도록 특정 URL로 리다이렉트 시키자.
 public class OAuth2SuccessHandler
-    // 인증 성공 후 특정 URL로 리다이렉트 시키고 싶을 때 활용할 수 있는
-    // success Handler
+        // 인증 성공 후 특정 URL로 리다이렉트 시키고 싶을 때 활용할 수 있는
+        // successHandler
         extends SimpleUrlAuthenticationSuccessHandler {
     private final JwtTokenUtils tokenUtils;
 
     public OAuth2SuccessHandler(JwtTokenUtils tokenUtils) {
         this.tokenUtils = tokenUtils;
     }
-    // 인증 성공 시 호출되는 메소드
+
     @Override
+    // 인증 성공시 호출되는 메소드
     public void onAuthenticationSuccess(
             HttpServletRequest request,
             HttpServletResponse response,
             Authentication authentication
     ) throws IOException, ServletException {
-        OAuth2User oAuth2User =
-                // OAuth2UserServiceImpl 에서 반환한 DefaultOAuth2User 저장
-                (OAuth2User) authentication.getPrincipal();
+        // OAuth2UserServiceImpl에서 반환한 DefaultOAuth2User
+        // 가 저장된다.
+        OAuth2User oAuth2User
+                = (OAuth2User) authentication.getPrincipal();
 
-        // JWT 발급
+        // JWT 생성
         String jwt = tokenUtils
-                .generateToken(User.withUsername(oAuth2User.getName())
-                        .password(oAuth2User.getAttribute("id"))
+                .generateToken(User
+                        .withUsername(oAuth2User.getName())
+                        .password(oAuth2User.getAttribute("id").toString())
                         .build());
 
-        // 목적지 url 설정
-        // 우리 서비스의 front-end 구성에 따라 유연하게 대처해야 함
+        // 목적지 URL 설정
+        // 우리 서비스의 Frontend 구성에 따라 유연하게 대처해야 한다.
         String targetUrl = String.format(
-                "http://localhost:8080/token/val?token=$s", jwt
+                "http://localhost:8080/token/val?token=%s", jwt
         );
-
-        // 실제 redirect 응답 생성
+        // 실제 Redirect 응답 생성
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }
 }
