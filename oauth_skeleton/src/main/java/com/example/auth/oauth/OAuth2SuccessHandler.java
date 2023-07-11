@@ -1,5 +1,6 @@
 package com.example.auth.oauth;
 
+import com.example.auth.entity.CustomUserDetails;
 import com.example.auth.jwt.JwtTokenUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -7,7 +8,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -24,9 +27,11 @@ public class OAuth2SuccessHandler
         // successHandler
         extends SimpleUrlAuthenticationSuccessHandler {
     private final JwtTokenUtils tokenUtils;
+    private final UserDetailsManager userDetailsManager;
 
-    public OAuth2SuccessHandler(JwtTokenUtils tokenUtils) {
+    public OAuth2SuccessHandler(JwtTokenUtils tokenUtils, UserDetailsManager userDetailsManager) {
         this.tokenUtils = tokenUtils;
+        this.userDetailsManager = userDetailsManager;
     }
 
     @Override
@@ -41,6 +46,23 @@ public class OAuth2SuccessHandler
         OAuth2User oAuth2User
                 = (OAuth2User) authentication.getPrincipal();
 
+        // email을 @ 기준으로 나누고 뒤쪽에 ID Provider (Naver) 같은 값으로 조치
+        String email = oAuth2User.getAttribute("email");
+        String provider = oAuth2User.getAttribute("provider");
+        String username = String.format("{%s}%s", provider, email.split("@")[0]);
+        String providerId = oAuth2User.getAttribute("id").toString();
+
+        if(!userDetailsManager.userExists(username)) {
+            userDetailsManager.createUser(CustomUserDetails.builder()
+                    .username(username)
+                    .password(providerId)
+                    .email(email)
+                    .provider(provider)
+                    .providerId(providerId)
+                    .build());
+        }
+
+        /*
         // JWT 생성
         String jwt = tokenUtils
                 .generateToken(User
@@ -48,6 +70,10 @@ public class OAuth2SuccessHandler
                         .password(oAuth2User.getAttribute("id").toString())
                         .build());
 
+         */
+
+        UserDetails details = userDetailsManager.loadUserByUsername(username);
+        String jwt = tokenUtils.generateToken(details);
         // 목적지 URL 설정
         // 우리 서비스의 Frontend 구성에 따라 유연하게 대처해야 한다.
         String targetUrl = String.format(

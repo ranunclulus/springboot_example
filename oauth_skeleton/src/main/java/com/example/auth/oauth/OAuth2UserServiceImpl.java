@@ -19,18 +19,31 @@ public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
+
+        // applicaton.yaml의 providerID가 나온다
+        String registrationId = userRequest.getClientRegistration().getRegistrationId();
+
         // 사용할 데이터를 다시 정리하는 목적의 Map
         Map<String, Object> attributes = new HashMap<>();
-        attributes.put("provider", "naver");
+        String nameAttribute = null;
 
-        // 받은 사용자 데이터를 정리한다.
-        Map<String, Object> responseMap = oAuth2User.getAttribute("response");
-        attributes.put("id", responseMap.get("id"));
-        attributes.put("email", responseMap.get("email"));
-        attributes.put("nickname", responseMap.get("nickname"));
-        String nameAttribute = "email";
+        // TODO Naver
+        if (registrationId.equals("naver")) {
+            attributes.put("provider", "naver");
+            // 받은 사용자 데이터를 정리한다.
+            Map<String, Object> responseMap = oAuth2User.getAttribute("response");
+            attributes.put("id", responseMap.get("id"));
+            attributes.put("email", responseMap.get("email"));
+            attributes.put("nickname", responseMap.get("nickname"));
+            nameAttribute = "email";
+        }
 
-        // 기본설정으로는 여기까지 오면 인증 성공
+        // TODO KAKAO
+        if (registrationId.equals("kakao")) {
+            attributes.put("provider", "kakao");
+            // 받은 사용자 데이터를 정리한다.
+        }
+        // 기본설정으로는 여기까지 오면 인증 성
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority("USER")),
                 attributes,
