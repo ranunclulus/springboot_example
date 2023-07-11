@@ -1,0 +1,56 @@
+package com.example.auth.oauth;
+
+import com.example.auth.jwt.JwtTokenUtils;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+
+@Slf4j
+@Component
+//OAuth2 통신이 성공적으로 끝났을 떄 사용하는 클래스
+// JWT를 사용하고 있기 때문에
+// ID Provider에게 받은 정보를 바탕으로 JWT를 발급하는 역할을 하는 용도
+public class OAuth2SuccessHandler
+    // 인증 성공 후 특정 URL로 리다이렉트 시키고 싶을 때 활용할 수 있는
+    // success Handler
+        extends SimpleUrlAuthenticationSuccessHandler {
+    private final JwtTokenUtils tokenUtils;
+
+    public OAuth2SuccessHandler(JwtTokenUtils tokenUtils) {
+        this.tokenUtils = tokenUtils;
+    }
+    // 인증 성공 시 호출되는 메소드
+    @Override
+    public void onAuthenticationSuccess(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Authentication authentication
+    ) throws IOException, ServletException {
+        OAuth2User oAuth2User =
+                // OAuth2UserServiceImpl 에서 반환한 DefaultOAuth2User 저장
+                (OAuth2User) authentication.getPrincipal();
+
+        // JWT 발급
+        String jwt = tokenUtils
+                .generateToken(User.withUsername(oAuth2User.getName())
+                        .password(oAuth2User.getAttribute("id"))
+                        .build());
+
+        // 목적지 url 설정
+        // 우리 서비스의 front-end 구성에 따라 유연하게 대처해야 함
+        String targetUrl = String.format(
+                "http://localhost:8080/token/val?token=$s", jwt
+        );
+
+        // 실제 redirect 응답 생성
+        getRedirectStrategy().sendRedirect(request, response, targetUrl);
+    }
+}

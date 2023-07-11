@@ -29,6 +29,8 @@ public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
         attributes.put("email", responseMap.get("email"));
         attributes.put("nickname", responseMap.get("nickname"));
         String nameAttribute = "email";
+
+        // 기본적으로 여기까지 오면 인증 성공
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority("USER")),
                 attributes,
