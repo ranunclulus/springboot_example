@@ -27,34 +27,33 @@ public class ProducerServices {
     // filename을 바탕으로 JSON으로 직렬화된 작업 정보를
     // Queue에 적재한 뒤
     // 사용자에게 JobTicket을 반환하는 메소드
-    public JobTicket senrd(String filename) {
+    public JobTicket send(String filename) {
         // jobId 발행
         String jobId = UUID.randomUUID().toString();
         JobTicket jobTicket = new JobTicket(jobId);
 
-        // jobPayload 생성 (Consumer에서 확인)
-        JobPayload jobPayload = new JobPayload(
+        // JobPayload 생성 (Consumer가 확인하는 데이터)
+        JobPayload payload = new JobPayload(
                 jobId,
                 filename,
-                String.format("/media/user-uploads/raw/%s", filename)
+                String.format("/media/user-uploaded/raw/%s", filename)
         );
 
-        // jobEntity로 작업 내역 입력 기록
+        // JobEntity로 작업 내역 입력 기록
         JobEntity jobEntity = new JobEntity();
         jobEntity.setJobId(jobId);
         jobEntity.setStatus("IDLE");
         jobRepository.save(jobEntity);
 
-        // Message Broker에게 메시지 전달
+        // Message Broker에게 메세지 전달
         rabbitTemplate.convertAndSend(
-                // Queue의 이름
+                // 어떤 Queue에 적재할지에 대한 이름
                 jobQueue.getName(),
-                // 메시지로 보낼 문자열
-                gson.toJson(jobPayload)
+                // 메세지로 보낼 문자열
+                gson.toJson(payload)
         );
-
-        // 사용자에게 추후 확인용 JwbTicket 전달
-        log.info("Send job: {}", jobTicket.getJobId());
+        // 사용자에게 추후 확인용 JobTicket 전달
+        log.info("Sent Job: {}", jobTicket.getJobId());
         return jobTicket;
     }
 }
