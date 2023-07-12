@@ -1,7 +1,7 @@
 spring:
   rabbitmq:
-    username: username
-    password: password
+    username: mgfxfbcl
+    password: L-6xxgzsgw8iVhcgFisf0HUKJF_w1PEK
     host: dingo.rmq.cloudamqp.com
     virtual-host: username
 
