@@ -3,10 +3,12 @@ package com.example.stomp.socket;
 import com.example.stomp.dto.ChatMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
 
 import java.text.SimpleDateFormat;
@@ -39,4 +41,22 @@ public class WebSocketMapping {
                 chatMessage
         );
     }
+
+    // 누군가가 구독했을 때
+    @SubscribeMapping("/topic/{roomId}")
+    public ChatMessage sendGreet(
+            @DestinationVariable("roomId")
+            Long roomId
+    ) {
+        log.info("new subscription to {}", roomId);
+        ChatMessage chatMessage = new ChatMessage();
+        chatMessage.setRoomId(roomId);
+        chatMessage.setSender("admin");
+        chatMessage.setMessage("hello");
+        String time = new SimpleDateFormat("HH:mm").format(new Date());
+        chatMessage.setTime(time);
+        return chatMessage;
+    }
+
+
 }
