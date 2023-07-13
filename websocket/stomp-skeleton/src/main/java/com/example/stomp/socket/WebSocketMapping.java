@@ -23,6 +23,10 @@ public class WebSocketMapping {
     public void sendChat(ChatMessage chatMessage) {
         log.info(chatMessage.toString());
         String time = new SimpleDateFormat("HH:mm").format(new Date());
+        chatMessage.setTime(time);
+        simpMessagingTemplate.convertAndSend(
+                String.format("/topic/%s", chatMessage.getRoomId()),
+                chatMessage
+        );
     }
-
 }
