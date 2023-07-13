@@ -35,7 +35,7 @@ public class FileController {
         multipartFile.transferTo(uploadTo);
 
         ResponseDto response = new ResponseDto();
-        response.setMessage("success");
+        response.setMessage(String.format("media/%s.png", now));
         return response;
     }
 }

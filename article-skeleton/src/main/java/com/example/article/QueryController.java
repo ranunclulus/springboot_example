@@ -1,6 +1,7 @@
 package com.example.article;
 
 import com.example.article.dto.ArticleDto;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.data.domain.Page;
@@ -13,8 +14,9 @@ import java.util.Map;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 public class QueryController {
-    private ArticleService service;
+    private final ArticleService service;
     // GET /path?query=keyword@limit=20
     @GetMapping("/path")
     public Map<String, Object> queryParams(

@@ -2,6 +2,8 @@ package com.example.contents;
 
 import com.example.contents.dto.UserDto;
 import com.example.contents.entity.UserEntity;
+import com.example.contents.exceptions.Status400Exception;
+import com.example.contents.exceptions.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -40,7 +42,7 @@ public class UserService {
     public UserDto readUserByUsername(String username) {
         Optional<UserEntity> userEntity = repository.findByUsername(username);
         if (userEntity.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new UserNotFoundException();
         return UserDto.fromEntity(userEntity.get());
     }
 
@@ -49,7 +51,7 @@ public class UserService {
         // update user로 사용자 이름은 업데이트할 수 없음
         Optional<UserEntity> optionalUser = repository.findById(id);
         if (optionalUser.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new UserNotFoundException();
         UserEntity userEntity = optionalUser.get();
         userEntity.setEmail(dto.getEmail());
         userEntity.setBio(dto.getBio());
@@ -64,7 +66,7 @@ public class UserService {
         // TODO 유저 존재 확인
         Optional<UserEntity> optionalUser = repository.findById(id);
         if(optionalUser.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+            throw new UserNotFoundException();
 
         // TODO 파일을 어디에 업로드할 건지 => /media/{userId}/profile.{파일확장자}
         String profileDir = String.format("media/%d/", id);

@@ -1,10 +1,10 @@
 
 spring:
   rabbitmq:
-    username: <username>
-    password: <password>
+    username: mgfxfbcl
+    password: e14UR1ovt41LCJS3noB1dR0KB7tpkqGP
     host: dingo.rmq.cloudamqp.com
-    virtual-host: <virtual host>
+    virtual-host: mgfxfbcl
 
   datasource:
     url: jdbc:sqlite:../producer/db.sqlite
