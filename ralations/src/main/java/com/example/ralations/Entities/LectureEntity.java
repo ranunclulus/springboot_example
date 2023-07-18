@@ -6,7 +6,6 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-
 @Entity
 @Table(name = "lecture")
 public class LectureEntity {
@@ -14,7 +13,8 @@ public class LectureEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String course_name;
+    private String name;
+    private String day;
     private Integer startTime;
     private Integer endTime;
 
