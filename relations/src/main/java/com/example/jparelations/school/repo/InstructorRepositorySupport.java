@@ -26,12 +26,11 @@ public class InstructorRepositorySupport extends QuerydslRepositorySupport {
                 .fetch();
     }
 
-    public List<Instructor> findByFirstNameOrLastName(String firstName, String lastName) {
+    public List<Instructor> findByLastName(String lastName) {
         return queryFactory
                 .selectFrom(instructor)
                 // 어떤 테이블의 레코드의 어떤 컬럼이 무엇과 일치하는지
-                .where(instructor.firstName.eq(firstName)
-                        .or(instructor.lastName.eq(lastName)))
+                .where(instructor.lastName.eq(lastName))
                 .fetch();
     }
 }
